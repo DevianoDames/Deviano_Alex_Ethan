@@ -18,6 +18,12 @@ body {
     background: #0c192c;
 }
 
+.box-one {
+    height: 100px;
+    width: 100px;
+    color: red;
+}
+
 .bubbles {
     position: relative;
     display: flex;
