@@ -131,16 +131,24 @@ h2{
 	background-color: #000; */
 	color: inherit;
 	overflow: hidden;
+    position: absolute;
+    
+}
+
+#layer {
+    width: 100%;
+    height: 100%;
 }
 
 .puzzle-pieces {
 	width: 300px;
-	margin-right: 20px;
+	float: left;
 
 }
 
 .puzzle-board { 
-	width: 300px; 
+	width: 300px;
+  
 	
 }
 
