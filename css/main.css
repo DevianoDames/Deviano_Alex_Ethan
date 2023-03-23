@@ -15,7 +15,10 @@
 
 body {
     min-height: 100vh;
-    background: #000000;
+    background-image: url(../images/concert_background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
 }
 
 .bubbles {
@@ -108,63 +111,65 @@ h2{
 
 
 #game-boards {
+    /* margin-top: 50px; */
 	width: 100%;
-	text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 800px;
+	height: 800px;
+    color: inherit;
+	overflow: hidden;
+    margin: 0 auto;
     
 }
 
-.puzzle-pieces {
-	margin-top: 40px;
-	height: 400px;
-	display: inline-block;
-	border: medium solid #333;
-	background-color: #000;
-	color: inherit;
-	overflow: hidden;
-}
-
-.puzzle-board {
-	margin-top: 40px;
-	height: 400px;
-	display: inline-block;
-	/* border: medium solid #333;
-	background-color: #000; */
-	color: inherit;
-	overflow: hidden;
+#pieces {
+    margin-top: -50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .puzzle-pieces {
-	width: 300px;
-	margin-right: 20px;
+    width: 40%;
+    height: 150px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+	border: 1px solid rgb(255, 255, 255);
+	background-color: rgb(11, 94, 177,0.5);
+	color: inherit;
+	overflow: hidden;
+    margin: 0 auto;
 
 }
 
-.puzzle-board { 
-	width: 300px; 
-	
+
+#layer {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+
 }
 
 .puzzle-image {
-	width: 25%;
+	width: 20%;
 	display: block;
 	padding: 8px;
 	cursor: pointer;
+    /* border: 2px solid rgb(255, 255, 255); */
+    /* background-color: rgb(16, 32, 73, 0.5); */
 }
 
-.puzzle-image:nth-child(even) {
-	float: right;
-	clear: both;
-}
-.puzzle-image:nth-child(odd) {
-	float: left;
-	clear: both;
-}
 
 #mainDrop {
-	width: 486.5px;
-	height: 189.5px;
-	margin-top: 474px;
-	margin-left: 285px;
+    
+	width: 440.5px;
+	height: 440.5px;
+	margin-top: 610px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -172,8 +177,95 @@ h2{
 }
 
 .dropZone {
-	width: 87.5px;
-	height: 87.5px;
+    /* background-color: #4f64dc; */
+    width: 65px;
+	height: 65px;
 	z-index: 3;
+    position: relative;
+
 }
+
+.drop-zone img {
+	float: none;
+	padding: 0;
+	position: absolute;
+	width: 100%;
+}
+
+.dropRow {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+@keyframes grow {
+    0% {height: 10px;}
+    50% {height: 20px;}
+    100% {height: 10px;}
+}
+
+/* @keyframes music-wave {
+    0% {transform: scale(0);}
+    50% {transform: scale(1);}
+    100% {transform: scale(0);}
+} */
+
+/* .box {
+    width: 10px;
+    height: 5px;
+    background-color: red;
+    display: inline-block;
+} */
+
+#music-wave {
+    display: inline-block;
+    
+}
+
+#red {
+    animation: grow 0.6s ease-out infinite;
+}
+
+#orange {
+
+    animation: grow 0.8s ease-out infinite;
+
+}
+#yellow {
+
+    animation: grow 0.9s ease-out infinite;
+}
+
+#green {
+
+    animation: grow 0.9s ease-out infinite;
+}
+
+#blue {
+
+    animation: grow 0.9s ease-out infinite;
+}
+
+#deep-blue {
+
+    animation: grow 0.9s ease-out infinite;
+}
+
+#purple {
+
+    animation: grow 0.9s ease-out infinite;
+}
+
+.audio-controls button {
+    padding: 0.5em 1em;
+    margin-top: 0.5em;
+    background-color: green;
+    color: white;
+    font-size: 1.25em;
+    cursor: pointer;
+  }
+
+
+
+
 

@@ -13,7 +13,8 @@ let puzzleBoard = document.querySelector(".puzzle-board"),
     puzzlePieces = document.querySelectorAll(".puzzle-pieces img"),
     dropZones = document.querySelectorAll('.dropZone'),
     puzzlePiece = document.querySelector(".puzzle-pieces"),
-    loopButtons = document.querySelectorAll('.loopButton'),
+    audioLoops = document.querySelectorAll(".audioLoops"),
+    playButton = document.querySelector('#playButton'),
     draggedPiece;
 
 
@@ -34,6 +35,7 @@ let puzzleBoard = document.querySelector(".puzzle-board"),
     }
     
     function handleDrop(e) { 
+      // debugger
       e.preventDefault();
       console.log('dropped something on me');
       // bug fix #1 should go here, and it's at most 3 lines of JS code
@@ -42,14 +44,29 @@ let puzzleBoard = document.querySelector(".puzzle-board"),
         console.log('puzzle piece already here please change');
         return;
       }
+      draggedPiece.style.width = "65px";
+      draggedPiece.style.height = "65px";
       this.appendChild(draggedPiece);
+
+      const audioKey = draggedPiece.getAttribute("data-key");
+      const audioElement = document.querySelector(`audio[data-key="${audioKey}"]`);
+      audioElement.currentTime = 0;
+    
+      audioElement.play();
+    
     
       // this line is going to move the dragged piece from the left side of the board
       // into whatever drop zone we choose. appendChild means "add element to the container"
 
+   
+
+      
+
     }
+    // function playAudio() {audioLoops.play();}
 
 
+  // function playAudio() {audioLoops.play();}
 
 
 // add the drag event handling to the puzzle pieces
@@ -62,3 +79,6 @@ dropZones.forEach(zone => zone.addEventListener("dragover", handleDragOver));
 
 // add the drop event handling
 dropZones.forEach(zone => zone.addEventListener("drop", handleDrop));
+// audioLoops.forEach(audios => audios.addEventListener("drop", loadAudio));
+// audioLoops.forEach(audios => audios.addEventListener("click", loadAudio));
+// playButton.addEventListener('click', playAudio);
