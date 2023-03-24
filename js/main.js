@@ -9,12 +9,14 @@ spanElements.forEach(span => {
 });
 
 
+
 let puzzleBoard = document.querySelector(".puzzle-board"),
     puzzlePieces = document.querySelectorAll(".puzzle-pieces img"),
     dropZones = document.querySelectorAll('.dropZone'),
     puzzlePiece = document.querySelector(".puzzle-pieces"),
     audioLoops = document.querySelectorAll(".audioLoops"),
-    playButton = document.querySelector('#playButton'),
+    // playButton = document.querySelector('#playButton'),
+    // pauseButton = document.querySelector('#pauseButton'),
     draggedPiece;
 
 
@@ -52,33 +54,77 @@ let puzzleBoard = document.querySelector(".puzzle-board"),
       const audioElement = document.querySelector(`audio[data-key="${audioKey}"]`);
       audioElement.currentTime = 0;
     
-      audioElement.play();
-    
-    
-      // this line is going to move the dragged piece from the left side of the board
-      // into whatever drop zone we choose. appendChild means "add element to the container"
-
-   
-
+      // audioElement.play();
+      // audioElement.addEventListener('loadedmetadata', function() {
       
+      //   playButton.addEventListener('click', function() {
+      //     audioElement.play();
+      //   });
+    
+       
+      //   pauseButton.addEventListener('click', function() {
+      //     audioElement.pause();
+      //   });
+      // });
+    
+      // audioElement.load();
+    
+      playButton.addEventListener('click', function () {
+        audioElement.play();
+      });
 
+      pauseButton.addEventListener('click', function () {
+        audioElement.pause();
+      });
+
+      audioElement.play();
     }
-    // function playAudio() {audioLoops.play();}
+
+
+    // function playAudio() {
+    //   debugger
+    //   const audioKey = draggedPiece.getAttribute("data-key");
+    //   const audioElement = document.querySelector(`audio[data-key="${audioKey}"]`);
+    //   audioElement.currentTime = 0;
+    //   audioElement.play();
+    // }
+    // function pauseAudio() {
+    //   debugger
+    //   const audioKey = draggedPiece.getAttribute("data-key");
+    //   const audioElement = document.querySelector(`audio[data-key="${audioKey}"]`);
+    //   audioElement.currentTime = 0;
+    //   audioElement.pause();
+    // }
 
 
   // function playAudio() {audioLoops.play();}
 
 
 // add the drag event handling to the puzzle pieces
-puzzlePieces.forEach(piece => piece.addEventListener("dragstart", handleStartDrag));
+    puzzlePieces.forEach(piece => piece.addEventListener("dragstart", handleStartDrag));
 
 // add the dragover AND the drop event handling to the drop zones
-dropZones.forEach(zone => zone.addEventListener("dragover", handleDragOver));
+dropZones.forEach(zone => {
+  zone.addEventListener("dragover", handleDragOver);
+  zone.addEventListener("drop", handleDrop);
+});
+// dropZones.forEach(zone => zone.addEventListener("dragover", handleDragOver));
 
 
 
 // add the drop event handling
 dropZones.forEach(zone => zone.addEventListener("drop", handleDrop));
+
+// playButton.addEventListener('click', playAudio);
+// playButton.addEventListener('click', function () {
+//   audioLoops.forEach(audio => audio.play());
+// });
+
+// pauseButton.addEventListener('click', pauseAudio);
+// pauseButton.addEventListener('click', function () {
+//   audioLoops.forEach(audio => audio.pause());
+// });
+
+
 // audioLoops.forEach(audios => audios.addEventListener("drop", loadAudio));
 // audioLoops.forEach(audios => audios.addEventListener("click", loadAudio));
-// playButton.addEventListener('click', playAudio);

@@ -256,10 +256,19 @@ h2{
     animation: grow 0.9s ease-out infinite;
 }
 
+.audio-controls {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-bottom: 70px;
+    margin-top: -70px;
+}
+
 .audio-controls button {
     padding: 0.5em 1em;
-    margin-top: 0.5em;
-    background-color: green;
+    margin: 0.5em 0.5em;
+    border-radius: 50%;
+    background-color: rgba(25, 38, 179, 0.5);
     color: white;
     font-size: 1.25em;
     cursor: pointer;
