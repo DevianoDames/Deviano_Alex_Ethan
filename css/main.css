@@ -14,6 +14,8 @@
     
 }
 
+.hidden {display: none;}
+
 body {
     min-height: 100vh;
     background-image: url(../images/concert_background.jpg);
@@ -275,7 +277,7 @@ h2{
     justify-content: center;
     flex-direction: row;
     margin-bottom: 170px;
-    margin-top: -450px;
+    margin-top: -440px;
 }
 
 .audio-controls button {
@@ -289,5 +291,50 @@ h2{
     z-index: 3;
   }
 
+#volumeControl {
+    background-color: #ff2d75;
+    z-index: 3;
+}
+
+.speakerCircle {
+    animation: speackerSound 0.5s infinite forwards;
+  }
+
+  @keyframes speackerSound {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.005);}
+  }
+
+.eyesAnimate {
+    fill: rgb(0, 0, 0);
+    animation: colorChange 2s infinite forwards;
+}
+
+@keyframes colorChange {
+    0% {
+        fill: rgb(0, 0, 0);
+    }
+    25% {
+        fill: rgb(255, 31, 214);
+    }
+    50% {
+        fill: rgb(0, 145, 255);
+    }
+    75% {
+        fill: yellow;
+    }
+    100% {
+        fill: rgb(255, 0, 0);
+    }
+  }
+
+  .speakerCircle2 {
+    animation: speackerSound2 0.5s infinite forwards;
+  }
+
+  @keyframes speackerSound2 {
+    0% {transform: scaleY(1);}
+    50% {transform: scaleY(1.1);}
+  }
 
 
