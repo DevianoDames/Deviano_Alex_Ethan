@@ -10,13 +10,17 @@ spanElements.forEach(span => {
 
 
 
-let puzzleBoard = document.querySelector(".puzzle-board"),
-    puzzlePieces = document.querySelectorAll(".puzzle-pieces img"),
+let puzzleBoard = document.querySelector('.puzzle-board'),
+    puzzlePieces = document.querySelectorAll('.puzzle-pieces img'),
     dropZones = document.querySelectorAll('.dropZone'),
-    puzzlePiece = document.querySelector(".puzzle-pieces"),
-    audioLoops = document.querySelectorAll(".audioLoops"),
-    // playButton = document.querySelector('#playButton'),
-    // pauseButton = document.querySelector('#pauseButton'),
+    puzzlePiece = document.querySelector('.puzzle-pieces'),
+    audioLoops = document.querySelectorAll('.audioLoops'),
+    djAnimations = document.querySelectorAll('.djAnimation'),
+    playButton = document.querySelector('#playButton'),
+    pauseButton = document.querySelector('#pauseButton'),
+    resetPuzzle = document.querySelector('#reset'),
+    volumeControl = document.querySelector('#volumeControl'),
+    masterAudio = null,
     draggedPiece;
 
 
@@ -37,7 +41,6 @@ let puzzleBoard = document.querySelector(".puzzle-board"),
     }
     
     function handleDrop(e) { 
-      // debugger
       e.preventDefault();
       console.log('dropped something on me');
       // bug fix #1 should go here, and it's at most 3 lines of JS code
@@ -50,9 +53,30 @@ let puzzleBoard = document.querySelector(".puzzle-board"),
       draggedPiece.style.height = "65px";
       this.appendChild(draggedPiece);
 
+    
       const audioKey = draggedPiece.getAttribute("data-key");
       const audioElement = document.querySelector(`audio[data-key="${audioKey}"]`);
       audioElement.currentTime = 0;
+      playButton.addEventListener('click', function () {
+        audioElement.play();
+      });
+
+      pauseButton.addEventListener('click', function () {
+        audioElement.pause();
+        pauseAnimation();
+      });
+
+      // The way that matches each audio, set the master audio first, and the next audio will  match the main based on the current time
+      // Master audio = audio current time by using if this is master audio, else
+      if (masterAudio === null) {
+        masterAudio = audioElement;
+      } else {
+        audioElement.currentTime = masterAudio.currentTime;
+      }
+
+      audioElement.play();
+      checkAnimations();
+      
     
       // audioElement.play();
       // audioElement.addEventListener('loadedmetadata', function() {
@@ -69,17 +93,80 @@ let puzzleBoard = document.querySelector(".puzzle-board"),
     
       // audioElement.load();
     
-      playButton.addEventListener('click', function () {
-        audioElement.play();
-      });
-
-      pauseButton.addEventListener('click', function () {
-        audioElement.pause();
-      });
-
-      audioElement.play();
     }
 
+    function playAnimation() {
+      djAnimations.forEach(anim => anim.style.webkitAnimationPlayState = 'running');
+    }
+    
+    function pauseAnimation() {
+      djAnimations.forEach(anim => anim.style.webkitAnimationPlayState = 'paused');
+    }
+
+    // function pauseAnimation() {
+    //   djAnimations.forEach(anim => anim.style.webkitAnimationPlayState = 'paused');
+    // }
+  
+    // function runAnimation() {
+    //   djAnimations.forEach(anim => anim.style.webkitAnimationPlayState = 'running');
+    // }
+  
+    // function checkAnimations() {
+    //   if (dropZones.children == 0) {
+    //     pauseAnimation();
+    //     return;
+    //   } 
+    //     runAnimation();
+    //   }
+    
+    // control graphic animations by using both paly and pause buttons
+    function checkAnimations() {
+      let anyDropZoneFilled = false;
+      dropZones.forEach(zone => {
+        if (zone.children.length > 0) {
+          anyDropZoneFilled = true;
+        }
+      });
+    
+      if (anyDropZoneFilled) {
+        playAnimation();
+      } else {
+        pauseAnimation();
+      }
+    }
+
+    function resetAll() {
+      location.reload();
+      console.log('reset all')
+    }
+
+
+    function setVolume() {
+      const volume = volumeControl.value / 100;
+      audioLoops.forEach(audio => {
+        audio.volume = volume;
+      });
+    }
+ 
+    // resetPuzzle.addEventListener('click', function() {
+    //   location.reload();
+    // });
+    
+ 
+
+    // function resetInstrument() {
+    //   debugger
+    //   dropZones.forEach((zone) => {
+    //     while(zone.firstChild) {
+    //     puzzlePieces.appendChild((zone.firstChild));
+    //       }
+    //     })
+    //     console.log('Reset all puzzlePieces from puzzle board to left side');
+      
+    // }
+
+  
+    
 
     // function playAudio() {
     //   debugger
@@ -101,7 +188,7 @@ let puzzleBoard = document.querySelector(".puzzle-board"),
 
 
 // add the drag event handling to the puzzle pieces
-    puzzlePieces.forEach(piece => piece.addEventListener("dragstart", handleStartDrag));
+puzzlePieces.forEach(piece => piece.addEventListener("dragstart", handleStartDrag));
 
 // add the dragover AND the drop event handling to the drop zones
 dropZones.forEach(zone => {
@@ -114,6 +201,22 @@ dropZones.forEach(zone => {
 
 // add the drop event handling
 dropZones.forEach(zone => zone.addEventListener("drop", handleDrop));
+
+// add the animation pause when the widow loads
+djAnimations.forEach(controller => controller.style.webkitAnimationPlayState = 'paused');
+
+// music button control
+playButton.addEventListener('click', playAnimation);
+pauseButton.addEventListener('click', pauseAnimation);
+volumeControl.addEventListener('input', setVolume);
+
+// reset button
+// resetPuzzle.addEventListener('click', resetInstrument);
+resetPuzzle.addEventListener('click', resetAll);
+
+
+// window.addEventListener('load', pauseAnimation);
+
 
 
 // playButton.addEventListener('click', playAudio);
