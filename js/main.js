@@ -115,6 +115,7 @@ dropZones.forEach(zone => {
 // add the drop event handling
 dropZones.forEach(zone => zone.addEventListener("drop", handleDrop));
 
+
 // playButton.addEventListener('click', playAudio);
 // playButton.addEventListener('click', function () {
 //   audioLoops.forEach(audio => audio.play());
