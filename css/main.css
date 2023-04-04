@@ -176,4 +176,15 @@ h2{
 	height: 87.5px;
 	z-index: 3;
 }
+#game-boards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.puzzle-board,
+.puzzle-pieces {
+    margin: 0 10px;
+}
 
