@@ -119,7 +119,7 @@ let puzzleBoard = document.querySelector('.puzzle-board'),
     //     runAnimation();
     //   }
     
-    // control graphic animations by using both paly and pause buttons
+    // control graphic animations by using both play and pause buttons
     function checkAnimations() {
       let anyDropZoneFilled = false;
       dropZones.forEach(zone => {
@@ -136,8 +136,12 @@ let puzzleBoard = document.querySelector('.puzzle-board'),
     }
 
     function resetAll() {
-      location.reload();
-      console.log('reset all')
+      dropZones.forEach(zone => {
+        while (zone.children.length > 0) {
+          puzzleBoard.appendChild(zone.children[0]);
+        }
+        console.log('reset all')
+      });
     }
 
 
