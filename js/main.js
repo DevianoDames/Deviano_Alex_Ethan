@@ -136,12 +136,32 @@ let puzzleBoard = document.querySelector('.puzzle-board'),
     }
 
     function resetAll() {
+      // remove all pieces from drop zones and move them back to the left side of the puzzle board
       dropZones.forEach(zone => {
-        while (zone.children.length > 0) {
-          puzzleBoard.appendChild(zone.children[0]);
+        while (zone.firstChild) {
+          puzzlePiece.appendChild(zone.firstChild);
         }
-        console.log('reset all')
       });
+    
+      // reset any audio that may be playing
+      audioLoops.forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+      });
+      masterAudio = null;
+      
+      // reset any animations that may be running
+      pauseAnimation();
+      
+      // reset the puzzle pieces to their original positions
+      shufflePuzzlePieces();
+    }
+    
+    function shufflePuzzlePieces() {
+      // remove all the puzzle pieces from the puzzle board
+      while (puzzleBoard.firstChild) {
+        puzzlePiece.appendChild(puzzleBoard.firstChild);
+      }
     }
 
 
@@ -217,7 +237,6 @@ volumeControl.addEventListener('input', setVolume);
 // reset button
 // resetPuzzle.addEventListener('click', resetInstrument);
 resetPuzzle.addEventListener('click', resetAll);
-
 
 // window.addEventListener('load', pauseAnimation);
 
