@@ -135,12 +135,32 @@ let puzzleBoard = document.querySelector('.puzzle-board'),
       }
     }
 
+    // reset button functionality
     function resetAll() {
-      location.reload();
-      console.log('reset all')
+      dropZones.forEach((zone) => {
+        while (zone.firstChild) {
+          const pieces = zone.firstChild;
+          pieces.style.width = "";
+          pieces.style.height = "";
+          puzzlePiece.appendChild(pieces);
+        }
+      });
+      console.log('Reset all puzzle pieces from puzzle board to down side');
+    
+      // Pause and reset audio
+      audioLoops.forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+      });
+      masterAudio = null;
+    
+      // Stop animations
+      pauseAnimation();
     }
+    
+    
 
-
+    // control volume
     function setVolume() {
       const volume = volumeControl.value / 100;
       audioLoops.forEach(audio => {
